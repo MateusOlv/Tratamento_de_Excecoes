@@ -11,10 +11,10 @@ public class Reservation {
 	
 	private static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	public Reservation(Integer roomNumber, LocalDate chekin, LocalDate chekout) {
+	public Reservation(Integer roomNumber, LocalDate checkin, LocalDate checkout) {
 		this.roomNumber = roomNumber;
-		this.checkIn = chekin;
-		this.checkOut = chekout;
+		this.checkIn = checkin;
+		this.checkOut = checkout;
 	}
 
 	public Integer getRoomNumber() {
@@ -34,8 +34,8 @@ public class Reservation {
 	}
 	
 	public long duration() {
-		Duration diff = Duration.between(checkOut, checkIn);
-		return diff.toDays();
+		Duration duration = Duration.between(checkIn.atStartOfDay(), checkOut.atStartOfDay());
+		return duration.toDays();
 	}
 	
 	public void updateDates(LocalDate checkIn, LocalDate checkOut) {
